@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Clean - Jasa Cuci & Perawatan Sepatu</title>
+    <!-- Memanggil library jQuery dari CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- =====================================================
+         BAGIAN CSS 
+         Tema: Putih & Biru 
+         ===================================================== -->
+    <style>
+        /* Reset dasar agar ukuran kotak (box-sizing) rapi */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #F4F7FB; /* Latar abu-abu sangat muda */
+            color: #1E293B;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Container pembatas lebar halaman */
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* 1. HEADER & NAVBAR */
+        .navbar {
+            background-color: #1E6091; /* Biru utama */
+            color: #FFFFFF;
+            border-bottom: 3px solid #154569;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+        }
+
+        .brand a {
+            text-decoration: none;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            color: #E0F2FE;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #E0F2FE;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+        }
+
+        .nav-link.active {
+            background-color: #FFFFFF;
+            color: #1E6091;
+            font-weight: 600;
+        }
+
+        /* Tombol menu HP disembunyikan di layar laptop */
+        .menu-toggle {
+            display: none;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: 1px solid #E0F2FE;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* 2. LAYOUT UTAMA, CARD, & GRID */
+        .main-content {
+            flex: 1;
+            padding: 28px 0;
+        }
+
+        .section-block {
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            color: #1E6091;
+            margin-bottom: 4px;
+        }
+
+        .page-title-box {
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #DCE3EB;
+        }
+
+        .page-title-box h1 {
+            color: #1E6091;
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #DCE3EB;
+            border-radius: 6px;
+            padding: 24px;
+        }
+
+        .card h2 {
+            color: #1E6091;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        /* Hero Section di Beranda */
+        .hero-section {
+            background-color: #FFFFFF;
+            border-left: 5px solid #1E6091;
+            margin-bottom: 24px;
+        }
+
+        .hero-section h1 {
+            color: #1E6091;
+            font-size: 1.65rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-section p {
+            color: #334155;
+            margin-bottom: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Sistem Grid Sederhana */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        /* 3. KARTU LAYANAN & TAHAPAN BERANDA */
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-badge {
+            display: inline-block;
+            align-self: flex-start;
+            background-color: #E0F2FE;
+            color: #1E6091;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .service-card h3 {
+            color: #1E293B;
+            margin-bottom: 8px;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 14px;
+        }
+
+        .service-meta {
+            border-top: 1px solid #DCE3EB;
+            padding-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* 7 Tahapan di Beranda */
+        .steps-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .step-box {
+            background-color: #F8FAFC;
+            border: 1px solid #DCE3EB;
+            border-radius: 6px;
+            padding: 14px;
+        }
+
+        .step-num {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            background-color: #1E6091;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .step-box strong {
+            display: block;
+            color: #1E6091;
+            margin-bottom: 4px;
+        }
+
+        .step-box p {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        /* 4. TOMBOL (BUTTON) & FORM INPUT */
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #2563EB;
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background-color: #1D4ED8;
+        }
+
+        .btn-secondary {
+            background-color: #FFFFFF;
+            color: #1E6091;
+            border-color: #1E6091;
+        }
+
+        .btn-secondary:hover {
+            background-color: #E0F2FE;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.92rem;
+            color: #1E293B;
+        }
+
+        .req {
+            color: #DC2626;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 9px 12px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #1E293B;
+            background-color: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2563EB;
+            background-color: #F8FAFC;
+        }
+
+        .input-error {
+            border-color: #DC2626 !important;
+            background-color: #FEF2F2 !important;
+        }
+
+        .help-text {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748B;
+            margin-top: 4px;
+        }
+
+        .error-msg {
+            display: block;
+            color: #DC2626;
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            padding: 8px 0;
+        }
+
+        .radio-label {
+            font-weight: 400 !important;
+            display: flex !important;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+        }
+
+        /* 5. FITUR TRACKING & STEPPER 7 STATUS */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            margin-bottom: 12px;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+        }
+
+        .sample-codes {
+            background-color: #F8FAFC;
+            border: 1px solid #DCE3EB;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn-chip {
+            background-color: #E0F2FE;
+            color: #1E6091;
+            border: 1px solid #BAE6FD;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-chip:hover {
+            background-color: #BAE6FD;
+        }
+
+        .tracking-result {
+            margin-top: 20px;
+            border-top: 2px solid #DCE3EB;
+            padding-top: 20px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #E0F2FE;
+            padding: 14px 18px;
+            border-radius: 6px;
+            border: 1px solid #BAE6FD;
+            margin-bottom: 16px;
+        }
+
+        .result-header h3 {
+            color: #1E6091;
+            font-size: 1.35rem;
+        }
+
+        .label-muted {
+            display: block;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        .badge-status {
+            display: inline-block;
+            background-color: #1E6091;
+            color: #FFFFFF;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .detail-grid {
+            margin-bottom: 16px;
+        }
+
+        .detail-item {
+            background-color: #F8FAFC;
+            border: 1px solid #DCE3EB;
+            padding: 10px 14px;
+            border-radius: 6px;
+        }
+
+        .highlight-box {
+            background-color: #E0F2FE;
+            border-color: #93C5FD;
+        }
+
+        .detail-label {
+            display: block;
+            font-size: 0.8rem;
+            color: #64748B;
+        }
+
+        .detail-val {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #1E293B;
+        }
+
+        .text-blue {
+            color: #1E6091;
+        }
+
+        .detail-notes {
+            background-color: #F8FAFC;
+            border-left: 4px solid #2563EB;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            font-size: 0.92rem;
+        }
+
+        /* Visualisasi 7 Tahapan Status */
+        .timeline-section h4 {
+            color: #1E6091;
+            margin-bottom: 12px;
+        }
+
+        .status-stepper {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .stepper-item {
+            border: 1px solid #DCE3EB;
+            background-color: #F8FAFC;
+            border-radius: 6px;
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748B;
+        }
+
+        .stepper-circle {
+            width: 28px;
+            height: 28px;
+            line-height: 26px;
+            border-radius: 50%;
+            border: 2px solid #CBD5E1;
+            margin: 0 auto 6px auto;
+            font-weight: 700;
+            background-color: #FFFFFF;
+        }
+
+        /* Status yang sudah dilewati (Selesai) */
+        .stepper-item.step-done {
+            background-color: #F0F9FF;
+            border-color: #93C5FD;
+            color: #1E6091;
+        }
+
+        .stepper-item.step-done .stepper-circle {
+            background-color: #2563EB;
+            border-color: #2563EB;
+            color: #FFFFFF;
+        }
+
+        /* Status yang sedang berlangsung saat ini (Aktif) */
+        .stepper-item.step-current {
+            background-color: #E0F2FE;
+            border: 2px solid #1E6091;
+            color: #1E6091;
+            font-weight: 700;
+        }
+
+        .stepper-item.step-current .stepper-circle {
+            background-color: #1E6091;
+            border-color: #1E6091;
+            color: #FFFFFF;
+        }
+
+        /* 6. HASIL KALKULATOR, ALERT, & TABEL */
+        .calc-result-box {
+            margin-top: 20px;
+            background-color: #E0F2FE;
+            border: 1px solid #93C5FD;
+            border-radius: 6px;
+            padding: 18px;
+        }
+
+        .calc-result-box h3 {
+            color: #1E6091;
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+        }
+
+        .calc-stat {
+            background-color: #FFFFFF;
+            border: 1px solid #DCE3EB;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .calc-label {
+            display: block;
+            font-size: 0.82rem;
+            color: #64748B;
+        }
+
+        .calc-value {
+            font-size: 1.15rem;
+            color: #1E6091;
+        }
+
+        .calc-note {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #1E293B;
+        }
+
+        /* Kotak Alert / Notifikasi */
+        .alert {
+            padding: 14px 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+            font-size: 0.92rem;
+        }
+
+        .alert-danger {
+            background-color: #FEF2F2;
+            border: 1px solid #FCA5A5;
+            color: #991B1B;
+        }
+
+        .alert-success {
+            background-color: #F0FDF4;
+            border: 1px solid #86EFAC;
+            color: #166534;
+        }
+
+        .summary-box {
+            margin-top: 10px;
+            background-color: #FFFFFF;
+            border: 1px solid #BBF7D0;
+            padding: 12px;
+            border-radius: 6px;
+            color: #1E293B;
+            font-size: 0.88rem;
+        }
+
+        .loading-box {
+            background-color: #E0F2FE;
+            color: #1E6091;
+            border: 1px solid #93C5FD;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-top: 16px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Tabel Riwayat Data */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 14px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #DCE3EB;
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: #1E6091;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #E0F2FE;
+        }
+
+        /* 7. FOOTER */
+        .footer {
+            background-color: #FFFFFF;
+            border-top: 1px solid #DCE3EB;
+            padding: 18px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: auto;
+        }
+
+        /* 8. MEDIA QUERY RESPONSIVE (HP & TABLET - NFR-005) */
+        @media (max-width: 900px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .status-stepper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                margin-top: 12px;
+            }
+
+            .nav-menu.show-menu {
+                display: block;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .nav-link {
+                display: block;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4,
+            .status-stepper {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =====================================================
+         BAGIAN HEADER & NAVBAR UTAMA (SOAL UTS 2.a)
+         ===================================================== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="brand">
+                <a class="nav-link-logo" data-page="beranda">
+                    <span class="brand-title">STEP CLEAN</span>
+                    <span class="brand-subtitle">Shoe Care & Laundry</span>
+                </a>
+            </div>
+
+            <!-- Tombol menu untuk tampilan HP (Responsive) -->
+            <button type="button" class="menu-toggle" id="btn-menu-hp">Menu</button>
+
+            <nav class="nav-menu" id="nav-list">
+                <ul>
+                    <li><a href="#beranda" class="nav-link active" data-page="beranda">Beranda</a></li>
+                    <li><a href="#tracking" class="nav-link" data-page="tracking.html">Tracking & Estimasi</a></li>
+                    <li><a href="#form-estimasi" class="nav-link" data-page="form-estimasi.html">Form Update Status</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Indikator Loading saat perpindahan halaman Ajax -->
+    <div class="container">
+        <div id="loading-bar" class="loading-box" style="display: none;">
+            Memuat halaman via Ajax, mohon tunggu...
+        </div>
+    </div>
+
+    <!-- =====================================================
+         AREA KONTEN UTAMA (DI BUAT DINAMIS DENGAN AJAX)
+         ===================================================== -->
+    <main id="konten-utama" class="container main-content">
+        <!-- Diisi otomatis saat pertama kali dibuka dari template Beranda -->
+    </main>
+
+    <!-- =====================================================
+         BAGIAN FOOTER
+         ===================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Step Clean - Sistem Informasi Jasa Cuci & Perawatan Sepatu</strong></p>
+            <p>Proyek UTS Pemrograman Web - Kelompok 10 (Kelas 2025C) D4 Manajemen Informatika UNESA &copy; 2026</p>
+        </div>
+    </footer>
+
+
+    <!-- =====================================================
+       HALAMAN BERANDA (DEFAULT - SOAL 2.a)
+         ===================================================== -->
+    <script type="text/template" id="tpl-beranda">
+        <div id="isi-beranda">
+            <!-- Hero / Pengenalan Singkat -->
+            <section class="card hero-section">
+                <h1>Step Clean - Layanan Cuci Sepatu & Tracking Pesanan</h1>
+                <p>
+                    Selamat datang di sistem informasi layanan perawatan sepatu Step Clean. 
+                    Melalui website ini, pelanggan dapat melihat daftar layanan, menghitung perkiraan waktu selesai, 
+                    serta memantau status pengerjaan sepatu secara langsung menggunakan Nomor Pesanan atau Nomor WhatsApp 
+                    tanpa harus datang ke toko.
+                </p>
+                <div class="hero-actions">
+                    <a href="#tracking" class="btn btn-primary btn-pindah-ajax" data-target="tracking.html">Cek Status & Estimasi</a>
+                    <a href="#form-estimasi" class="btn btn-secondary btn-pindah-ajax" data-target="form-estimasi.html">Input / Update Pesanan (Admin)</a>
+                </div>
+            </section>
+
+            <!-- Ringkasan Layanan & Paket Harga (FR-001 & FR-002) -->
+            <section class="section-block">
+                <div class="section-header">
+                    <h2>Daftar Layanan & Estimasi Pengerjaan</h2>
+                    <p>Pilihan paket perawatan sepatu sesuai kebutuhan Anda dengan harga transparan.</p>
+                </div>
+
+                <div class="grid-4">
+                    <div class="card service-card">
+                        <div class="service-badge">Layanan Cepat</div>
+                        <h3>Fast Clean</h3>
+                        <p class="service-desc">Pencucian cepat bagian luar sepatu (upper dan midsole) untuk sepatu yang tidak terlalu kotor.</p>
+                        <div class="service-meta">
+                            <p><strong>Harga:</strong> Rp 35.000 / pasang</p>
+                            <p><strong>Estimasi:</strong> 1 Hari Kerja</p>
+                        </div>
+                    </div>
+
+                    <div class="card service-card">
+                        <div class="service-badge">Paling Diminati</div>
+                        <h3>Deep Clean</h3>
+                        <p class="service-desc">Pencucian menyeluruh seluruh bagian sepatu (upper, midsole, outsole, insole, dan tali sepatu).</p>
+                        <div class="service-meta">
+                            <p><strong>Harga:</strong> Rp 50.000 / pasang</p>
+                            <p><strong>Estimasi:</strong> 3 Hari Kerja</p>
+                        </div>
+                    </div>
+
+                    <div class="card service-card">
+                        <div class="service-badge">Perawatan Khusus</div>
+                        <h3>Unyellowing</h3>
+                        <p class="service-desc">Perawatan khusus untuk menghilangkan noda kuning (oksidasi) pada bagian midsole sepatu putih.</p>
+                        <div class="service-meta">
+                            <p><strong>Harga:</strong> Rp 65.000 / pasang</p>
+                            <p><strong>Estimasi:</strong> 4 Hari Kerja</p>
+                        </div>
+                    </div>
+
+                    <div class="card service-card">
+                        <div class="service-badge">Restorasi Warna</div>
+                        <h3>Repaint</h3>
+                        <p class="service-desc">Pewarnaan ulang sepatu yang sudah pudar menggunakan cat khusus sepatu agar kembali seperti baru.</p>
+                        <div class="service-meta">
+                            <p><strong>Harga:</strong> Rp 120.000 / pasang</p>
+                            <p><strong>Estimasi:</strong> 7 Hari Kerja</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Daftar Tahapan Pencucian & Status Pesanan (7 Status Proposal) -->
+            <section class="section-block">
+                <div class="card">
+                    <h2>Alur Tahapan Status Pesanan di Step Clean</h2>
+                    <p>Setiap sepatu yang masuk ke Step Clean akan melewati 7 tahapan status yang tercatat di sistem:</p>
+                    
+                    <div class="steps-overview">
+                        <div class="step-box">
+                            <span class="step-num">1</span>
+                            <strong>Menunggu Konfirmasi</strong>
+                            <p>Pesanan telah masuk sistem dan menunggu verifikasi admin.</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">2</span>
+                            <strong>Dijemput</strong>
+                            <p>Kurir toko sedang menjemput sepatu ke alamat pelanggan (jika pilih pickup).</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">3</span>
+                            <strong>Diterima Toko</strong>
+                            <p>Sepatu sudah berada di workshop Step Clean dan siap masuk antrean cuci.</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">4</span>
+                            <strong>Sedang Dicuci</strong>
+                            <p>Proses pembersihan atau perawatan sepatu sedang dikerjakan teknisi.</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">5</span>
+                            <strong>Proses Finishing</strong>
+                            <p>Tahap pengeringan akhir, pemberian parfum sepatu, dan pengecekan kualitas.</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">6</span>
+                            <strong>Selesai</strong>
+                            <p>Proses perawatan sepatu telah tuntas dan sepatu sudah dikemas rapi.</p>
+                        </div>
+                        <div class="step-box">
+                            <span class="step-num">7</span>
+                            <strong>Siap Diambil/Diantar</strong>
+                            <p>Sepatu siap diambil pelanggan di toko atau sedang diantar kurir ke alamat tujuan.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </script>
+
+
+    <!-- =====================================================
+         HALAMAN TRACKING & ESTIMASI (SOAL 2.b)
+         ===================================================== -->
+    <script type="text/template" id="tpl-tracking">
+        <div id="fragmen-konten">
+            <div class="page-title-box">
+                <h1>Tracking Status Pesanan & Kalkulator Estimasi</h1>
+                <p>Pantau progres pencucian sepatu Anda atau hitung perkiraan waktu selesai pengerjaan sebelum memesan.</p>
+            </div>
+
+            <!-- FITUR 1: SIMULASI TRACKING PESANAN (FR-008) -->
+            <section class="card section-block">
+                <h2>1. Lacak Status Pesanan (FR-008)</h2>
+                <p>Masukkan Nomor Pesanan (Order Code) atau Nomor WhatsApp yang terdaftar saat pemesanan.</p>
+
+                <form id="form-cari-tracking" class="search-box">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="input-kata-kunci" class="form-control" placeholder="Contoh: ORD-001 atau 081234567890">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cari Pesanan</button>
+                    <button type="button" id="btn-reset-tracking" class="btn btn-secondary">Reset</button>
+                </form>
+
+                <!-- Petunjuk Kode Dummy untuk memudahkan pengujian Dosen -->
+                <div class="sample-codes">
+                    <span><strong>Data Uji Coba (Klik untuk mengisi otomatis):</strong></span>
+                    <button type="button" class="btn-chip pilih-contoh" data-kode="ORD-001">ORD-001 (081234567890)</button>
+                    <button type="button" class="btn-chip pilih-contoh" data-kode="ORD-002">ORD-002 (085712345678)</button>
+                    <button type="button" class="btn-chip pilih-contoh" data-kode="ORD-003">ORD-003 (082198765432)</button>
+                </div>
+
+                <!-- Kotak Peringatan jika pesanan tidak ditemukan (Sesuai Activity Diagram) -->
+                <div id="alert-tracking-gagal" class="alert alert-danger" style="display: none;">
+                    <strong>Pesanan Tidak Ditemukan!</strong><br>
+                    Maaf, nomor pesanan atau nomor WhatsApp yang Anda masukkan tidak terdaftar di sistem kami. Silakan periksa kembali input Anda.
+                </div>
+
+                <!-- Hasil Pencarian Tracking -->
+                <div id="hasil-tracking-box" class="tracking-result" style="display: none;">
+                    <div class="result-header">
+                        <div>
+                            <span class="label-muted">Kode Pesanan:</span>
+                            <h3 id="detail-kode">ORD-001</h3>
+                        </div>
+                        <div class="status-badge-wrapper">
+                            <span class="label-muted">Status Saat Ini:</span>
+                            <span id="detail-status-badge" class="badge-status">Sedang Dicuci</span>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Informasi Detail Pesanan -->
+                    <div class="grid-2 detail-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Nama Pelanggan:</span>
+                            <span id="detail-nama" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Nomor WhatsApp:</span>
+                            <span id="detail-wa" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Jenis Sepatu:</span>
+                            <span id="detail-sepatu" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Layanan & Jumlah:</span>
+                            <span id="detail-layanan" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Metode Pickup / Delivery:</span>
+                            <span id="detail-metode" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Total Biaya:</span>
+                            <span id="detail-biaya" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tanggal Pesanan Masuk:</span>
+                            <span id="detail-tgl-masuk" class="detail-val">-</span>
+                        </div>
+                        <div class="detail-item highlight-box">
+                            <span class="detail-label">Estimasi Tanggal Selesai:</span>
+                            <strong id="detail-tgl-estimasi" class="detail-val text-blue">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="detail-notes">
+                        <strong>Catatan / Notifikasi Terakhir:</strong>
+                        <p id="detail-catatan">-</p>
+                    </div>
+
+                    <!-- Visualisasi 7 Tahapan Status Pesanan -->
+                    <div class="timeline-section">
+                        <h4>Progres Tahapan Pengerjaan (7 Status Resmi):</h4>
+                        <div id="daftar-tahapan-status" class="status-stepper">
+                            <!-- Diisi otomatis oleh jQuery berdasarkan status pesanan -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FITUR 2: KALKULATOR ESTIMASI SELESAI (FR-007) -->
+            <section class="card section-block">
+                <h2>2. Simulasi Kalkulator Estimasi Selesai & Biaya (FR-007)</h2>
+                <p>Hitung perkiraan kapan sepatu Anda selesai dicuci beserta rincian biayanya sebelum melakukan booking.</p>
+
+                <form id="form-kalkulator-estimasi">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="calc-tgl-masuk">Tanggal Rencana Masuk</label>
+                            <input type="date" id="calc-tgl-masuk" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calc-layanan">Pilih Jenis Layanan</label>
+                            <select id="calc-layanan" class="form-control">
+                                <option value="Fast Clean" data-hari="1" data-harga="35000">Fast Clean (1 Hari - Rp 35.000/pasang)</option>
+                                <option value="Deep Clean" data-hari="3" data-harga="50000">Deep Clean (3 Hari - Rp 50.000/pasang)</option>
+                                <option value="Unyellowing" data-hari="4" data-harga="65000">Unyellowing (4 Hari - Rp 65.000/pasang)</option>
+                                <option value="Repaint" data-hari="7" data-harga="120000">Repaint (7 Hari - Rp 120.000/pasang)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calc-jumlah">Jumlah Pasang Sepatu</label>
+                            <input type="number" id="calc-jumlah" class="form-control" min="1" max="20" value="1" required>
+                            <small class="help-text">*Pemesanan lebih dari 3 pasang menambah waktu pengerjaan 1 hari.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calc-pengembalian">Metode Pengembalian (Delivery)</label>
+                            <select id="calc-pengembalian" class="form-control">
+                                <option value="Ambil Sendiri" data-ongkir="0">Ambil Sendiri di Toko (Gratis)</option>
+                                <option value="Diantar" data-ongkir="10000">Diantar Kurir ke Alamat (+Rp 10.000)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Hitung Estimasi</button>
+                    </div>
+                </form>
+
+                <!-- Kotak Hasil Perhitungan Estimasi -->
+                <div id="hasil-kalkulator-box" class="calc-result-box" style="display: none;">
+                    <h3>Hasil Simulasi Estimasi</h3>
+                    <div class="grid-3">
+                        <div class="calc-stat">
+                            <span class="calc-label">Lama Pengerjaan</span>
+                            <strong id="out-durasi" class="calc-value">- Hari</strong>
+                        </div>
+                        <div class="calc-stat">
+                            <span class="calc-label">Estimasi Tanggal Selesai</span>
+                            <strong id="out-tgl-selesai" class="calc-value">-</strong>
+                        </div>
+                        <div class="calc-stat">
+                            <span class="calc-label">Estimasi Total Biaya</span>
+                            <strong id="out-total-biaya" class="calc-value">-</strong>
+                        </div>
+                    </div>
+                    <p id="out-rincian-teks" class="calc-note"></p>
+                </div>
+            </section>
+        </div>
+    </script>
+
+
+    <!-- =====================================================
+         HALAMAN FORM UPDATE STATUS (SOAL 2.c)
+         ===================================================== -->
+    <script type="text/template" id="tpl-form-estimasi">
+        <div id="fragmen-konten">
+            <div class="page-title-box">
+                <h1>Form Pengelolaan Status & Estimasi Pesanan (Admin)</h1>
+                <p>Halaman transaksi untuk mencatat atau memperbarui status pengerjaan, tanggal estimasi selesai, dan pesan notifikasi pelanggan.</p>
+            </div>
+
+            <!-- Form Transaksi mengacu pada Tabel orders & notifications -->
+            <section class="card section-block">
+                <h2>Input / Update Data Pesanan</h2>
+                <p>Seluruh kolom bertanda bintang (<span class="req">*</span>) wajib diisi dengan benar sebelum dikirim ke server.</p>
+
+                <form id="form-update-status" novalidate>
+                    <div class="grid-2">
+                        <!-- 1. Kode Pesanan (order_code) -->
+                        <div class="form-group">
+                            <label for="order_code">1. Kode Pesanan (order_code) <span class="req">*</span></label>
+                            <input type="text" id="order_code" name="order_code" class="form-control" placeholder="Contoh: ORD-004">
+                            <small class="help-text">Wajib diawali dengan format <strong>ORD-</strong> (Contoh: ORD-004)</small>
+                            <span class="error-msg" id="err-order_code"></span>
+                        </div>
+
+                        <!-- 2. Nomor WhatsApp Pelanggan (whatsapp) -->
+                        <div class="form-group">
+                            <label for="whatsapp">2. Nomor WhatsApp Pelanggan (whatsapp) <span class="req">*</span></label>
+                            <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Contoh: 081298765432">
+                            <small class="help-text">Hanya angka, panjang 10 sampai 14 digit.</small>
+                            <span class="error-msg" id="err-whatsapp"></span>
+                        </div>
+
+                        <!-- 3. Pilihan Layanan (service_id) -->
+                        <div class="form-group">
+                            <label for="service_id">3. Pilihan Layanan (service_id) <span class="req">*</span></label>
+                            <select id="service_id" name="service_id" class="form-control">
+                                <option value="">-- Pilih Layanan Cuci Sepatu --</option>
+                                <option value="1" data-nama="Fast Clean" data-harga="35000">1 - Fast Clean (Rp 35.000)</option>
+                                <option value="2" data-nama="Deep Clean" data-harga="50000">2 - Deep Clean (Rp 50.000)</option>
+                                <option value="3" data-nama="Unyellowing" data-harga="65000">3 - Unyellowing (Rp 65.000)</option>
+                                <option value="4" data-nama="Repaint" data-harga="120000">4 - Repaint (Rp 120.000)</option>
+                            </select>
+                            <span class="error-msg" id="err-service_id"></span>
+                        </div>
+
+                        <!-- 4. Jumlah Sepatu (shoe_count) -->
+                        <div class="form-group">
+                            <label for="shoe_count">4. Jumlah Sepatu (shoe_count) <span class="req">*</span></label>
+                            <input type="number" id="shoe_count" name="shoe_count" class="form-control" min="1" placeholder="Minimal 1 pasang">
+                            <span class="error-msg" id="err-shoe_count"></span>
+                        </div>
+
+                        <!-- 5. Tanggal Pesanan Masuk (order_date) -->
+                        <div class="form-group">
+                            <label for="order_date">5. Tanggal Pesanan Masuk (order_date) <span class="req">*</span></label>
+                            <input type="date" id="order_date" name="order_date" class="form-control">
+                            <span class="error-msg" id="err-order_date"></span>
+                        </div>
+
+                        <!-- 6. Estimasi Tanggal Selesai (estimated_completion) -->
+                        <div class="form-group">
+                            <label for="estimated_completion">6. Estimasi Tanggal Selesai (estimated_completion) <span class="req">*</span></label>
+                            <input type="date" id="estimated_completion" name="estimated_completion" class="form-control">
+                            <small class="help-text">Tanggal selesai tidak boleh lebih awal dari tanggal masuk.</small>
+                            <span class="error-msg" id="err-estimated_completion"></span>
+                        </div>
+
+                        <!-- 7. Status Pesanan (status - 7 Status Proposal) -->
+                        <div class="form-group">
+                            <label for="status">7. Status Pesanan (status) <span class="req">*</span></label>
+                            <select id="status" name="status" class="form-control">
+                                <option value="">-- Pilih Status Pengerjaan --</option>
+                                <option value="Menunggu Konfirmasi">1. Menunggu Konfirmasi</option>
+                                <option value="Dijemput">2. Dijemput</option>
+                                <option value="Diterima Toko">3. Diterima Toko</option>
+                                <option value="Sedang Dicuci">4. Sedang Dicuci</option>
+                                <option value="Proses Finishing">5. Proses Finishing</option>
+                                <option value="Selesai">6. Selesai</option>
+                                <option value="Siap Diambil/Diantar">7. Siap Diambil/Diantar</option>
+                            </select>
+                            <span class="error-msg" id="err-status"></span>
+                        </div>
+
+                        <!-- 8. Metode Pengembalian (delivery_method) -->
+                        <div class="form-group">
+                            <label>8. Metode Pengembalian (delivery_method) <span class="req">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="delivery_method" value="Ambil Sendiri"> Ambil Sendiri
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="delivery_method" value="Diantar"> Diantar Kurir
+                                </label>
+                            </div>
+                            <span class="error-msg" id="err-delivery_method"></span>
+                        </div>
+                    </div>
+
+                    <!-- 9. Catatan / Pesan Notifikasi (notes / message) -->
+                    <div class="form-group">
+                        <label for="notes">9. Catatan Pesanan / Pesan Notifikasi (notes / message) <span class="req">*</span></label>
+                        <textarea id="notes" name="notes" rows="3" class="form-control" placeholder="Contoh: Sepatu kanvas putih sudah masuk tahap pencucian deep clean."></textarea>
+                        <span class="error-msg" id="err-notes"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Validasi & Simpan Data</button>
+                        <button type="reset" id="btn-bersihkan-form" class="btn btn-secondary">Bersihkan Form</button>
+                    </div>
+                </form>
+
+                <!-- Kotak Konfirmasi Sukses setelah lolos validasi jQuery -->
+                <div id="kotak-sukses-form" class="alert alert-success" style="display: none;">
+                    <h4>Data Valid dan Siap Dikirim ke Server HTTP!</h4>
+                    <p>Seluruh input telah melewati proses validasi client-side jQuery dan berhasil ditambahkan ke tabel riwayat pesanan di bawah (serta langsung dapat dicari pada menu Tracking).</p>
+                    <div id="ringkasan-data-valid" class="summary-box"></div>
+                </div>
+            </section>
+
+            <!-- Tabel Riwayat Data Pesanan & Status -->
+            <section class="card section-block">
+                <h2>Daftar Riwayat Status & Estimasi Pesanan</h2>
+                <p>Data di bawah ini merupakan data pesanan aktif di dalam sistem (termasuk data baru yang Anda tambahkan dari form di atas).</p>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="tabel-riwayat-pesanan">
+                        <thead>
+                            <tr>
+                                <th>Kode (order_code)</th>
+                                <th>WhatsApp</th>
+                                <th>Layanan</th>
+                                <th>Jml</th>
+                                <th>Tgl Masuk</th>
+                                <th>Estimasi Selesai</th>
+                                <th>Status</th>
+                                <th>Pengembalian</th>
+                                <th>Catatan / Notifikasi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="isi-tabel-riwayat">
+                            <!-- Diisi otomatis dari array Javascript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </script>
+
+
+    <!-- =====================================================
+         BAGIAN JAVASCRIPT / JQUERY (GABUNGAN DARI script.js)
+         ===================================================== -->
+    <script>
+        // Daftar 7 Status Resmi sesuai Bab II Proposal Step Clean
+        var daftarStatusResmi = [
+            "Menunggu Konfirmasi",
+            "Dijemput",
+            "Diterima Toko",
+            "Sedang Dicuci",
+            "Proses Finishing",
+            "Selesai",
+            "Siap Diambil/Diantar"
+        ];
+
+        // Data Dummy Pesanan (Mengacu struktur tabel orders, customers, services, notifications)
+        var dataPesanan = [
+            {
+                order_code: "ORD-001",
+                customer_name: "Muhammad Rafi Adiwanto",
+                whatsapp: "081234567890",
+                shoe_type: "Nike Air Force 1 White (Sneakers)",
+                service_id: 2,
+                service_name: "Deep Clean",
+                shoe_count: 2,
+                order_date: "2026-10-24",
+                estimated_completion: "2026-10-27",
+                status: "Sedang Dicuci",
+                pickup_method: "Dijemput",
+                delivery_method: "Diantar",
+                total_price: 110000,
+                notes: "Sepatu sedang dalam tahap pencucian bagian midsole dan insole."
+            },
+            {
+                order_code: "ORD-002",
+                customer_name: "Nikmal Maulina Arba'ani",
+                whatsapp: "085712345678",
+                shoe_type: "Converse Chuck Taylor 70s (Canvas)",
+                service_id: 3,
+                service_name: "Unyellowing",
+                shoe_count: 1,
+                order_date: "2026-10-22",
+                estimated_completion: "2026-10-26",
+                status: "Proses Finishing",
+                pickup_method: "Antar Sendiri",
+                delivery_method: "Ambil Sendiri",
+                total_price: 65000,
+                notes: "Proses penghilangan noda kuning selesai, sedang tahap pengeringan dan pemberian parfum."
+            },
+            {
+                order_code: "ORD-003",
+                customer_name: "M. Khananta Putra Sani",
+                whatsapp: "082198765432",
+                shoe_type: "Vans Old Skool Black White (Suede)",
+                service_id: 1,
+                service_name: "Fast Clean",
+                shoe_count: 1,
+                order_date: "2026-10-25",
+                estimated_completion: "2026-10-26",
+                status: "Siap Diambil/Diantar",
+                pickup_method: "Antar Sendiri",
+                delivery_method: "Ambil Sendiri",
+                total_price: 35000,
+                notes: "Sepatu sudah selesai dicuci, dikemas rapi, dan siap diambil di toko Step Clean."
+            }
+        ];
+
+        $(document).ready(function () {
+            // Tampilkan halaman Beranda saat pertama kali dibuka
+            $("#konten-utama").html($("#tpl-beranda").html());
+
+            // =====================================================
+            // 1. MENU HAMBURGER UNTUK TAMPILAN HP (RESPONSIVE)
+            // =====================================================
+            $(document).on("click", "#btn-menu-hp", function () {
+                $("#nav-list").toggleClass("show-menu");
+            });
+
+            // =====================================================
+            // 2. NAVIGASI MENGGUNAKAN TEKNIK AJAX (SOAL UTS 2.a)
+            // =====================================================
+            $(document).on("click", ".nav-link, .btn-pindah-ajax, .nav-link-logo", function (e) {
+                var targetPage = $(this).attr("data-page") || $(this).attr("data-target");
+
+                if (!targetPage) {
+                    return;
+                }
+
+                e.preventDefault(); // Mencegah reload halaman penuh
+
+                // Tutup menu HP jika sedang terbuka
+                $("#nav-list").removeClass("show-menu");
+
+                // Update tampilan class active pada menu navbar
+                $(".nav-link").removeClass("active");
+                $('.nav-link[data-page="' + targetPage + '"]').addClass("active");
+
+                // Tentukan ID template pendamping (untuk mode 1 file)
+                var idTemplate = "#tpl-beranda";
+                if (targetPage === "tracking.html") {
+                    idTemplate = "#tpl-tracking";
+                } else if (targetPage === "form-estimasi.html") {
+                    idTemplate = "#tpl-form-estimasi";
+                }
+
+                // Jika memilih Beranda, langsung tampilkan isi Beranda
+                if (targetPage === "beranda") {
+                    $("#konten-utama").hide().html($(idTemplate).html()).fadeIn(200);
+                    window.scrollTo(0, 0);
+                    return;
+                }
+
+                // Tampilkan indikator loading
+                $("#loading-bar").show();
+
+                // Buat Blob URL dari template HTML agar fungsi $.ajax() tetap berjalan nyata
+                // baik saat dijalankan di satu file maupun di Live Server
+                var htmlKonten = $(idTemplate).html();
+                var blob = new Blob([htmlKonten], { type: "text/html" });
+                var ajaxUrl = URL.createObjectURL(blob);
+
+                // Panggil halaman menggunakan fungsi jQuery $.ajax()
+                $.ajax({
+                    url: ajaxUrl,
+                    type: "GET",
+                    dataType: "html",
+                    success: function (response) {
+                        $("#loading-bar").hide();
+                        $("#konten-utama").hide().html(response).fadeIn(200);
+
+                        // Inisialisasi ulang tanggal dan tabel riwayat setelah halaman dimuat
+                        setTanggalDefault();
+                        renderTabelRiwayat();
+                        window.scrollTo(0, 0);
+                    },
+                    error: function () {
+                        // Fallback langsung ke template jika browser membatasi Blob URL
+                        $("#loading-bar").hide();
+                        $("#konten-utama").hide().html(htmlKonten).fadeIn(200);
+                        setTanggalDefault();
+                        renderTabelRiwayat();
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+
+            // =====================================================
+            // 3. FITUR 1: SIMULASI TRACKING PESANAN (FR-008)
+            // =====================================================
+            // Klik tombol contoh kode pesanan agar langsung mengisi kolom pencarian
+            $(document).on("click", ".pilih-contoh", function () {
+                var kodeContoh = $(this).attr("data-kode");
+                $("#input-kata-kunci").val(kodeContoh);
+                $("#form-cari-tracking").trigger("submit");
+            });
+
+            // Saat form pencarian tracking di-submit
+            $(document).on("submit", "#form-cari-tracking", function (e) {
+                e.preventDefault();
+
+                var keyword = $.trim($("#input-kata-kunci").val()).toUpperCase();
+
+                // Sembunyikan pesan error dan kotak hasil terlebih dahulu
+                $("#alert-tracking-gagal").hide();
+                $("#hasil-tracking-box").hide();
+
+                if (keyword === "") {
+                    $("#alert-tracking-gagal")
+                        .html("<strong>Input Kosong!</strong><br>Silakan masukkan Nomor Pesanan (contoh: ORD-001) atau Nomor WhatsApp terlebih dahulu.")
+                        .fadeIn(150);
+                    return;
+                }
+
+                // Cari data di dalam array dataPesanan berdasarkan order_code atau whatsapp
+                var pesananDitemukan = null;
+                for (var i = 0; i < dataPesanan.length; i++) {
+                    var item = dataPesanan[i];
+                    if (item.order_code.toUpperCase() === keyword || item.whatsapp === keyword) {
+                        pesananDitemukan = item;
+                        break;
+                    }
+                }
+
+                // Jika tidak ditemukan, tampilkan pesan peringatan merah (Sesuai Activity Diagram)
+                if (pesananDitemukan === null) {
+                    $("#alert-tracking-gagal")
+                        .html("<strong>Pesanan Tidak Ditemukan!</strong><br>Maaf, pesanan dengan kode atau nomor WhatsApp <b>" + $("#input-kata-kunci").val() + "</b> tidak ditemukan di database kami.")
+                        .fadeIn(150);
+                    return;
+                }
+
+                // Jika ditemukan, tampilkan detail pesanan ke layar
+                $("#detail-kode").text(pesananDitemukan.order_code);
+                $("#detail-status-badge").text(pesananDitemukan.status);
+                $("#detail-nama").text(pesananDitemukan.customer_name);
+                $("#detail-wa").text(pesananDitemukan.whatsapp);
+                $("#detail-sepatu").text(pesananDitemukan.shoe_type);
+                $("#detail-layanan").text(pesananDitemukan.service_name + " (" + pesananDitemukan.shoe_count + " Pasang)");
+                $("#detail-metode").text("Pickup: " + pesananDitemukan.pickup_method + " | Pengembalian: " + pesananDitemukan.delivery_method);
+                $("#detail-biaya").text(formatRupiah(pesananDitemukan.total_price));
+                $("#detail-tgl-masuk").text(pesananDitemukan.order_date);
+                $("#detail-tgl-estimasi").text(pesananDitemukan.estimated_completion);
+                $("#detail-catatan").text(pesananDitemukan.notes);
+
+                // Bangun visualisasi 7 tahapan status pesanan
+                var indexStatusAktif = daftarStatusResmi.indexOf(pesananDitemukan.status);
+                var htmlStepper = "";
+
+                for (var j = 0; j < daftarStatusResmi.length; j++) {
+                    var namaTahap = daftarStatusResmi[j];
+                    var classTahap = "";
+
+                    if (j < indexStatusAktif) {
+                        classTahap = "step-done"; // Tahap sudah terlewati
+                    } else if (j === indexStatusAktif) {
+                        classTahap = "step-current"; // Tahap saat ini
+                    }
+
+                    htmlStepper +=
+                        '<div class="stepper-item ' + classTahap + '">' +
+                        '<div class="stepper-circle">' + (j + 1) + '</div>' +
+                        '<div class="stepper-label">' + namaTahap + '</div>' +
+                        '</div>';
+                }
+
+                $("#daftar-tahapan-status").html(htmlStepper);
+                $("#hasil-tracking-box").fadeIn(200);
+            });
+
+            // Tombol Reset pada fitur Tracking
+            $(document).on("click", "#btn-reset-tracking", function () {
+                $("#input-kata-kunci").val("");
+                $("#alert-tracking-gagal").hide();
+                $("#hasil-tracking-box").hide();
+            });
+
+            // =====================================================
+            // 4. FITUR 2: KALKULATOR ESTIMASI SELESAI (FR-007)
+            // =====================================================
+            $(document).on("submit", "#form-kalkulator-estimasi", function (e) {
+                e.preventDefault();
+
+                var tglMasukStr = $("#calc-tgl-masuk").val();
+                var opsiLayanan = $("#calc-layanan option:selected");
+                var namaLayanan = opsiLayanan.val();
+                var durasiDasar = parseInt(opsiLayanan.attr("data-hari"), 10);
+                var hargaSatuan = parseInt(opsiLayanan.attr("data-harga"), 10);
+
+                var jumlahSepatu = parseInt($("#calc-jumlah").val(), 10) || 1;
+                var opsiDelivery = $("#calc-pengembalian option:selected");
+                var metodeDelivery = opsiDelivery.val();
+                var biayaOngkir = parseInt(opsiDelivery.attr("data-ongkir"), 10) || 0;
+
+                if (!tglMasukStr) {
+                    alert("Silakan pilih Tanggal Rencana Masuk terlebih dahulu.");
+                    return;
+                }
+
+                // Tambahan 1 hari kerja apabila mencuci lebih dari 3 pasang sepatu
+                var tambahanHari = jumlahSepatu > 3 ? 1 : 0;
+                var totalHari = durasiDasar + tambahanHari;
+
+                // Hitung tanggal selesai
+                var tglMasukObj = new Date(tglMasukStr);
+                tglMasukObj.setDate(tglMasukObj.getDate() + totalHari);
+                var tglSelesaiStr = formatTanggalYYYYMMDD(tglMasukObj);
+
+                // Hitung total biaya
+                var totalBiaya = (hargaSatuan * jumlahSepatu) + biayaOngkir;
+
+                // Tampilkan hasil ke layar menggunakan jQuery
+                $("#out-durasi").text(totalHari + " Hari Kerja");
+                $("#out-tgl-selesai").text(tglSelesaiStr);
+                $("#out-total-biaya").text(formatRupiah(totalBiaya));
+
+                var infoTambahan = "Layanan " + namaLayanan + " untuk " + jumlahSepatu + " pasang sepatu (" + metodeDelivery + ").";
+                if (tambahanHari > 0) {
+                    infoTambahan += " Termasuk tambahan waktu 1 hari karena jumlah sepatu lebih dari 3 pasang.";
+                }
+                $("#out-rincian-teks").text(infoTambahan);
+
+                $("#hasil-kalkulator-box").hide().fadeIn(200);
+            });
+
+            // =====================================================
+            // 5. VALIDASI FORM TRANSAKSI & UPDATE STATUS (SOAL 2.c)
+            // =====================================================
+            $(document).on("submit", "#form-update-status", function (e) {
+                e.preventDefault(); // Mencegah reload halaman
+
+                // Bersihkan pesan error sebelumnya
+                $(".error-msg").text("");
+                $(".form-control").removeClass("input-error");
+                $("#kotak-sukses-form").hide();
+
+                // Ambil nilai dari semua field form
+                var orderCode = $.trim($("#order_code").val()).toUpperCase();
+                var whatsapp = $.trim($("#whatsapp").val());
+                var serviceId = $("#service_id").val();
+                var serviceName = $("#service_id option:selected").attr("data-nama") || "";
+                var serviceHarga = parseInt($("#service_id option:selected").attr("data-harga"), 10) || 0;
+                var shoeCount = $.trim($("#shoe_count").val());
+                var orderDate = $("#order_date").val();
+                var estimatedCompletion = $("#estimated_completion").val();
+                var statusPesanan = $("#status").val();
+                var deliveryMethod = $('input[name="delivery_method"]:checked').val();
+                var notes = $.trim($("#notes").val());
+
+                var isValid = true;
+
+                // 1. Validasi Kode Pesanan (Wajib diisi & harus diawali ORD-)
+                if (orderCode === "") {
+                    tampilkanError("order_code", "Kode pesanan wajib diisi.");
+                    isValid = false;
+                } else if (orderCode.indexOf("ORD-") !== 0 || orderCode.length < 5) {
+                    tampilkanError("order_code", "Format kode pesanan harus diawali 'ORD-' diikuti nomor (contoh: ORD-004).");
+                    isValid = false;
+                }
+
+                // 2. Validasi Nomor WhatsApp (Wajib diisi, hanya angka, 10-14 digit)
+                var regexAngka = /^[0-9]+$/;
+                if (whatsapp === "") {
+                    tampilkanError("whatsapp", "Nomor WhatsApp pelanggan wajib diisi.");
+                    isValid = false;
+                } else if (!regexAngka.test(whatsapp)) {
+                    tampilkanError("whatsapp", "Nomor WhatsApp hanya boleh berisi angka tanpa spasi atau tanda hubung.");
+                    isValid = false;
+                } else if (whatsapp.length < 10 || whatsapp.length > 14) {
+                    tampilkanError("whatsapp", "Panjang nomor WhatsApp harus antara 10 sampai 14 digit.");
+                    isValid = false;
+                }
+
+                // 3. Validasi Pilihan Layanan
+                if (!serviceId || serviceId === "") {
+                    tampilkanError("service_id", "Silakan pilih salah satu layanan cuci sepatu.");
+                    isValid = false;
+                }
+
+                // 4. Validasi Jumlah Sepatu (Minimal 1)
+                var jmlSepatuInt = parseInt(shoeCount, 10);
+                if (shoeCount === "" || isNaN(jmlSepatuInt) || jmlSepatuInt < 1) {
+                    tampilkanError("shoe_count", "Jumlah sepatu wajib diisi minimal 1 pasang.");
+                    isValid = false;
+                }
+
+                // 5. Validasi Tanggal Pesanan Masuk
+                if (!orderDate) {
+                    tampilkanError("order_date", "Tanggal pesanan masuk wajib diisi.");
+                    isValid = false;
+                }
+
+                // 6. Validasi Estimasi Tanggal Selesai & Logika Tanggal
+                if (!estimatedCompletion) {
+                    tampilkanError("estimated_completion", "Estimasi tanggal selesai wajib diisi.");
+                    isValid = false;
+                } else if (orderDate && estimatedCompletion < orderDate) {
+                    tampilkanError("estimated_completion", "Tanggal estimasi selesai tidak boleh lebih awal dari tanggal pesanan masuk.");
+                    isValid = false;
+                }
+
+                // 7. Validasi Status Pesanan
+                if (!statusPesanan || statusPesanan === "") {
+                    tampilkanError("status", "Silakan pilih status pengerjaan pesanan saat ini.");
+                    isValid = false;
+                }
+
+                // 8. Validasi Metode Pengembalian (Radio Button)
+                if (!deliveryMethod) {
+                    $("#err-delivery_method").text("Silakan pilih metode pengembalian sepatu (Ambil Sendiri / Diantar).");
+                    isValid = false;
+                }
+
+                // 9. Validasi Catatan / Pesan Notifikasi
+                if (notes === "") {
+                    tampilkanError("notes", "Catatan atau pesan notifikasi status wajib diisi.");
+                    isValid = false;
+                }
+
+                // Jika ada field yang belum valid, hentikan proses penyimpanan
+                if (!isValid) {
+                    return;
+                }
+
+                // Hitung total harga otomatis berdasarkan layanan & metode pengembalian
+                var ongkir = deliveryMethod === "Diantar" ? 10000 : 0;
+                var totalHarga = (serviceHarga * jmlSepatuInt) + ongkir;
+
+                // Periksa apakah order_code sudah ada di array (Jika ada: update, jika belum: tambahkan baru)
+                var indeksAda = -1;
+                for (var i = 0; i < dataPesanan.length; i++) {
+                    if (dataPesanan[i].order_code.toUpperCase() === orderCode) {
+                        indeksAda = i;
+                        break;
+                    }
+                }
+
+                var objekDataBaru = {
+                    order_code: orderCode,
+                    customer_name: indeksAda !== -1 ? dataPesanan[indeksAda].customer_name : "Pelanggan Step Clean",
+                    whatsapp: whatsapp,
+                    shoe_type: indeksAda !== -1 ? dataPesanan[indeksAda].shoe_type : "Sepatu Pelanggan",
+                    service_id: parseInt(serviceId, 10),
+                    service_name: serviceName,
+                    shoe_count: jmlSepatuInt,
+                    order_date: orderDate,
+                    estimated_completion: estimatedCompletion,
+                    status: statusPesanan,
+                    pickup_method: indeksAda !== -1 ? dataPesanan[indeksAda].pickup_method : "Antar Sendiri",
+                    delivery_method: deliveryMethod,
+                    total_price: totalHarga,
+                    notes: notes
+                };
+
+                if (indeksAda !== -1) {
+                    dataPesanan[indeksAda] = objekDataBaru;
+                } else {
+                    dataPesanan.push(objekDataBaru);
+                }
+
+                // Tampilkan ringkasan data yang valid
+                var htmlRingkasan =
+                    "<strong>Kode Pesanan:</strong> " + objekDataBaru.order_code + " | " +
+                    "<strong>WhatsApp:</strong> " + objekDataBaru.whatsapp + "<br>" +
+                    "<strong>Layanan:</strong> " + objekDataBaru.service_name + " (" + objekDataBaru.shoe_count + " pasang) | " +
+                    "<strong>Total Biaya:</strong> " + formatRupiah(objekDataBaru.total_price) + "<br>" +
+                    "<strong>Tanggal Masuk:</strong> " + objekDataBaru.order_date + " | " +
+                    "<strong>Estimasi Selesai:</strong> " + objekDataBaru.estimated_completion + "<br>" +
+                    "<strong>Status Terbaru:</strong> " + objekDataBaru.status + " | " +
+                    "<strong>Pengembalian:</strong> " + objekDataBaru.delivery_method + "<br>" +
+                    "<strong>Pesan Notifikasi:</strong> " + objekDataBaru.notes;
+
+                $("#ringkasan-data-valid").html(htmlRingkasan);
+                $("#kotak-sukses-form").fadeIn(200);
+
+                // Perbarui tabel riwayat di bawah form
+                renderTabelRiwayat();
+            });
+
+            // Tombol Bersihkan Form
+            $(document).on("click", "#btn-bersihkan-form", function () {
+                $(".error-msg").text("");
+                $(".form-control").removeClass("input-error");
+                $("#kotak-sukses-form").hide();
+            });
+        });
+
+        // =====================================================
+        // FUNGSI PEMBANTU (HELPER FUNCTIONS)
+        // =====================================================
+
+        // Fungsi menampilkan pesan error spesifik di bawah input
+        function tampilkanError(idField, pesan) {
+            $("#" + idField).addClass("input-error");
+            $("#err-" + idField).text(pesan);
+        }
+
+        // Fungsi merender daftar pesanan ke dalam tabel riwayat
+        function renderTabelRiwayat() {
+            if ($("#isi-tabel-riwayat").length === 0) {
+                return;
+            }
+
+            var barisHtml = "";
+            for (var i = 0; i < dataPesanan.length; i++) {
+                var d = dataPesanan[i];
+                barisHtml +=
+                    "<tr>" +
+                    "<td><strong>" + d.order_code + "</strong></td>" +
+                    "<td>" + d.whatsapp + "</td>" +
+                    "<td>" + d.service_name + "</td>" +
+                    "<td>" + d.shoe_count + " psg</td>" +
+                    "<td>" + d.order_date + "</td>" +
+                    "<td>" + d.estimated_completion + "</td>" +
+                    "<td><span class='badge-status' style='font-size:0.78rem; padding:3px 8px;'>" + d.status + "</span></td>" +
+                    "<td>" + d.delivery_method + "</td>" +
+                    "<td>" + d.notes + "</td>" +
+                    "</tr>";
+            }
+
+            $("#isi-tabel-riwayat").html(barisHtml);
+        }
+
+        // Fungsi mengisi tanggal hari ini secara otomatis pada input date kosong
+        function setTanggalDefault() {
+            var hariIni = formatTanggalYYYYMMDD(new Date());
+            if ($("#calc-tgl-masuk").length > 0 && !$("#calc-tgl-masuk").val()) {
+                $("#calc-tgl-masuk").val(hariIni);
+            }
+            if ($("#order_date").length > 0 && !$("#order_date").val()) {
+                $("#order_date").val(hariIni);
+            }
+        }
+
+        // Fungsi mengubah objek Date menjadi string YYYY-MM-DD
+        function formatTanggalYYYYMMDD(dateObj) {
+            var tahun = dateObj.getFullYear();
+            var bulan = String(dateObj.getMonth() + 1).padStart(2, "0");
+            var tanggal = String(dateObj.getDate()).padStart(2, "0");
+            return tahun + "-" + bulan + "-" + tanggal;
+        }
+
+        // Fungsi mengubah angka menjadi format Rupiah sederhana
+        function formatRupiah(angka) {
+            return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+    </script>
+</body>
+</html>
